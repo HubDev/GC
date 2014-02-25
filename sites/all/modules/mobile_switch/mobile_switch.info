@@ -1,0 +1,15 @@
+name = Mobile Switch
+description = Simple theme switch for mobile devices.
+package = User interface
+core = 7.x
+configure = admin/config/user-interface/mobile-switch
+dependencies[] = libraries (2.x)
+dependencies[] = mobile_detect_import
+
+
+; Information added by drupal.org packaging script on 2013-10-01
+version = "7.x-2.0-alpha1+2-dev"
+core = "7.x"
+project = "mobile_switch"
+datestamp = "1380587438"
+

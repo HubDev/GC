@@ -1,0 +1,8 @@
+; $Id: codefactory.info, belibem Exp $ 
+name = codefactory custom module
+description = codefactory module containing custom code 
+package = other
+version = "7.x-0.1"
+core = "7.x"
+
+

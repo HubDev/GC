@@ -1,0 +1,362 @@
+<?php
+// $Id: codefactory.module,belibem Exp $
+
+/**
+ * @file
+ * 
+ */
+
+
+function codefactory_init() {
+  // redirection of mobile users js lib
+  drupal_add_library('codefactory', 'detectmobile');
+  /*drupal_add_js('https://oggfeedback.icoa.com/oggfeedback/oggfeedback.nocache.js', array('group' => JS_THEME, 'every_page' => TRUE, 'weight' => '9999'));
+  drupal_add_css('https://oggfeedback.icoa.com/oggfeedbackcss/c34dc31042d2d3680142d727843a01a6', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => '9999', 'preprocess' => FALSE));*/
+  drupal_add_js('
+  	var _hmc = _hmc || [];
+		_hmc.push(["app", "0280b71ef72b4483b4812257c72795d7"]);
+		_hmc.push(["title","How can we help?"]);
+		(function() {
+		var hm = document.createElement("script"); hm.type = "text/javascript";
+		hm.async = true; hm.src = "https://hipmob.s3.amazonaws.com/hipmobchat.min.js";
+		var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(hm, b);
+		})();
+  ', 'inline');
+}
+// -------------------------------
+// Hook menu:
+// -------------------------------
+function codefactory_menu() 
+{
+
+	$items['start-your-journey'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_journey_start_callback', # function that returns or echos pages content
+		'access callback' => TRUE, # no restrictions on access rights
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+    $items['getTours'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_get_tours_callback', # function that returns or echos pages content
+		'access callback' => TRUE, # no restrictions on access rights
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+    $items['getTourDetails'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_get_tour_details_callback', # function that returns or echos pages content
+		'access callback' => TRUE, # no restrictions on access rights
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+    $items['discover-great-tours'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_discover_callback', # function that returns or echos pages content
+		'access callback' => TRUE, # no restrictions on access rights
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+	$items['cf-add-product/%/%'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_add_product_callback', # function that returns or echos pages content
+		'page arguments' => array(1,2),
+		'access callback' => TRUE, # no restrictions on access rights
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+    $items['dashboard'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_dashboard_callback', # function that returns or echos pages content
+		'access callback' => '_check_settings_role', 
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+    $items['guide/%'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_guide_callback', # function that returns or echos pages content
+		'access callback' => '_check_settings_role', 
+		'page arguments' => array(1),
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+    $items['what-is-living-green'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_learn_callback', # function that returns or echos pages content
+		'access callback' => TRUE, # no restrictions on access rights
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+    $items['userSettings'] = array( # url and menu link placement for this page
+		'page callback' => 'codefactory_user_settings_callback', # function that returns or echos pages content
+		'access callback' => TRUE, # no restrictions on access rights
+		'type' => MENU_NORMAL_ITEM, # this type creates normal menu item
+    );
+	
+	
+    return $items;
+}
+
+function _check_settings_role(){
+	global $user;
+	if ($user->uid == 1 || in_array('authenticated user', $user->roles)){
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+
+function codefactory_journey_start_callback(){
+	//echo 'testing';
+
+	//$entity=commerce_product_load_by_sku("0001");
+	//echo '<pre>'; print_r($entity);echo '</pre>'; 
+	drupal_add_library('codefactory', 'bxslider');
+	$vars=array();
+
+	$query = new EntityFieldQuery();
+
+	$query->entityCondition('entity_type', 'node')
+	  ->entityCondition('bundle', 'location')
+	  ->propertyCondition('status', '1') //published, you don't need to add '=' it's added by default
+	  ->propertyOrderBy('title', 'asc');
+	  //->fieldOrderBy('field_priority', 'value', 'ASC');
+
+	$result = $query->execute();
+
+	if (isset($result['node'])) {
+
+		$slideshow_node_nids = array_keys($result['node']);
+		$slideshow_nodes = entity_load('node', $slideshow_node_nids);	  
+	  
+		foreach($slideshow_nodes as $n){
+
+			$query = new EntityFieldQuery();
+			$query->entityCondition('entity_type', 'commerce_product')
+			  ->entityCondition('bundle', 'tour')
+			  ->propertyCondition('status', '1') //published, you don't need to add '=' it's added by default
+			  ->fieldCondition('field_tour_location', 'target_id', array($n->nid), '=')
+			  ->propertyOrderBy('title', 'asc'); 
+			$result = $query->execute();
+
+			if(sizeof($result)>0){
+
+				$vars['slides'][]=array(
+					'slide_img_src' => image_style_url("location_select",$n->field_location_image['und'][0]['uri']),
+					'slide_img_alt' => $n->field_location_image['und'][0]['alt'],
+					'slide_img_title' => $n->field_location_image['und'][0]['title'],
+					'slide_title' => $n->title,
+					'nid' =>$n->nid
+				);
+
+			}
+		}
+
+	}
+	
+	return theme('tour_guide', $vars);
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+// theme
+function codefactory_theme($existing, $type, $theme, $path) {
+  return array(
+	'tour_guide' => array(
+		'template' => 'tour_guide',
+		'type'=>'theme',
+		'variables' => array(
+			'title' => NULL,
+		),
+    ),
+    'discover_page' => array(
+		'template' => 'discover_page',
+		'type'=>'theme',
+		'variables' => array(
+			'title' => NULL,
+		),
+    ),
+    'dashboard_page' => array(
+		'template' => 'dashboard_page',
+		'type'=>'theme',
+		'variables' => array(
+			'title' => NULL,
+		),
+    ),
+    'guide_page' => array(
+		'template' => 'guide_page',
+		'type'=>'theme',
+		'variables' => array(
+			'title' => NULL,
+		),
+    ),
+    'bees_page' => array(
+		'template' => 'bees_page',
+		'type'=>'theme',
+		'variables' => array(
+			'title' => NULL,
+		),
+    ),
+  );
+}
+
+function codefactory_discover_callback(){
+	
+	$vars = array();
+	return theme('discover_page', $vars);
+
+}
+
+/**
+ * Implements hook_library().
+ */
+function codefactory_library() {
+  $items = array();
+  global $base_url;
+  $items['bxslider'] = array(
+    'title' => 'bxslider',
+    'website' => 'http://bxslider.com',
+    'version' => '4.0',
+    'js' => array(
+      $base_url . '/sites/all/libraries/bxslider/jquery.bxslider.min.js' => array(),
+    ),
+    'css' => array(
+      $base_url . '/sites/all/libraries/bxslider/jquery.bxslider.css' => array(
+        'type' => 'file',
+        'media' => 'screen',
+      ),
+    ),
+  );
+   $items['detectmobile'] = array(
+    'title' => 'detectmobile',
+    'website' => 'http://detectmobile.com',
+    'version' => '4.0',
+    'js' => array(
+      $base_url . '/sites/all/libraries/detectmobile/detectmobile.js' => array(),
+    )
+  );
+
+  $items['oggflow'] = array(
+    'title' => 'oggflow',
+    'website' => 'http://oggflow.com/',
+    'version' => '1.0',
+    'js' => array(
+      'https://oggfeedback.icoa.com/oggfeedback/oggfeedback.nocache.js' => array(),
+    ),
+    'css' => array(
+      'https://oggfeedback.icoa.com/oggfeedbackcss/c34dc31042d2d3680142d727843a01a6' => array(
+        'type' => 'file',
+        'media' => 'screen',
+      ),
+    ),
+  );
+
+  return $items;
+}
+
+function codefactory_get_tours_callback(){
+
+	if(isset($_POST['nid'])){
+
+		$nid = $_POST['nid'];
+		
+		$query = new EntityFieldQuery();
+
+		$query->entityCondition('entity_type', 'commerce_product')
+		  ->entityCondition('bundle', 'tour')
+		  ->propertyCondition('status', '1') //published, you don't need to add '=' it's added by default
+		  ->fieldCondition('field_tour_location', 'target_id', array($nid), '=')
+		  ->propertyOrderBy('title', 'asc'); 
+
+
+		$result = $query->execute();
+		if (isset($result['commerce_product'])) {
+			$tour_skus = array_keys($result['commerce_product']);
+			$tours = entity_load('commerce_product', $tour_skus);
+
+			foreach($tours as $t){
+				$vars['tours'][]=array(
+					/*'slide_img_src' => image_style_url("medium",$n->field_tour_image['und'][0]['uri']),
+					'slide_img_alt' => $n->field_location_image['und'][0]['alt'],
+					'slide_img_title' => $n->field_location_image['und'][0]['title'],*/
+					'tour_title' => $t->title,
+					'tour_sku' =>$t->sku
+				);
+			 
+			}
+		}
+		echo json_encode($vars);
+
+	}
+
+}
+
+function codefactory_get_tour_details_callback(){
+
+	if(isset($_POST['sku'])){
+
+		$sku = $_POST['sku'];
+
+		$product = commerce_product_load_by_sku($sku);
+
+		foreach($product->field_tour_green_foot_print['und'] as $gfp){
+			$p = taxonomy_term_load($gfp['tid']);
+			$gft_arr[] = array(
+				'name' => $p->name
+			);
+		}
+
+		$vars['product'][] = array(
+			'product_sku' => $product->sku,
+			'product_title' => $product->title,
+			'product_image' => image_style_url("tour_description",$product->field_tour_image['und'][0]['uri']),
+			'product_description' =>  truncate_utf8($product->field_tour_short_description['und'][0]['value'], 140, TRUE),
+			'product_price' => $product->commerce_price['und'][0],
+			'days' => $product->field_tour_days['und'][0]['value'],
+			'hours' => $product->field_tour_hours['und'][0]['value'],
+			'minutes' => $product->field_tour_minutes['und'][0]['value'],
+			'activities' => $product->field_tour_activities['und'],
+			'green_foot_print' => $gft_arr
+		);
+
+		echo json_encode($vars);
+
+	}
+
+}
+
+/**
+* Custom function to add product(s) to a cart by product id
+*/
+function codefactory_add_product_callback($sku,$quantity=1) {
+    if ($product = commerce_product_load_by_sku($sku) ) {
+        global $user;
+        $uid = $user->uid;
+        $line_item = commerce_product_line_item_new($product, $quantity);
+        $line_item->field_ticket_type['und'][]['value'] = 0;
+        $line_item = commerce_cart_product_add($uid, $line_item, FALSE);
+        drupal_goto('checkout');
+    }    
+}
+
+function codefactory_dashboard_callback(){
+	$vars = array();
+	return theme('dashboard_page', $vars);
+
+}
+
+function codefactory_guide_callback($sku){
+
+	drupal_add_library('codefactory', 'bxslider');
+	drupal_add_js('https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false', 'external');
+	$vars = array($sku);
+	return theme('guide_page', $vars);
+
+}
+
+function codefactory_learn_callback(){
+
+	$vars = array();
+	return theme('bees_page', $vars);
+
+}
+
+function codefactory_user_settings_callback(){
+
+	//print json_encode($_REQUEST);
+	$pass = $_POST['password'];
+	global $user;
+	$existingUser = user_load($user->uid);
+	$existingUser->pass = $pass;
+
+	user_save((object) array('uid' => $existingUser->uid), (array) $existingUser);
+	print json_encode("Password changed successfully!");
+
+}

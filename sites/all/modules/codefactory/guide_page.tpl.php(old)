@@ -1,0 +1,98 @@
+<div class="guide_menu">
+	<ul>
+		<li style="z-index:5" class="active active2">
+			<div>
+				<a href="#div-one"><img src="/<?php echo drupal_get_path('theme', 'living_green_2').'/images/guide_icon_home.png' ?>" /></a>
+			</div>
+		</li><li style="z-index:4">
+			<div>
+				<a href="#div-two">Select Guided</a>
+			</div>
+		</li><li style="z-index:3">
+			<div>
+				<a href="#div-three">Review Map</a>
+			</div>
+		</li><li style="z-index:2">
+			<div>
+				<a href="#div-four">Making Choices</a>
+			</div>
+		</li><li style="z-index:1">
+			<div>
+				<a href="#div-five">Share</a>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<div class="container">
+	<div id="div-one" class="main_cont active">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id fermentum dui. Sed sit amet condimentum augue, nec sagittis lorem. Pellentesque iaculis ipsum mi, non fermentum lectus tempor vel. Ut vel mauris quis metus vehicula consequat. Cras id libero vitae orci aliquam tristique. Praesent at lacus id augue varius vestibulum.
+	</div>
+	<div id="div-two" class="main_cont">
+		Donec pulvinar augue in nisl ultrices ornare. Integer commodo, mauris et ullamcorper aliquam, metus eros euismod quam, quis pretium purus diam in velit. Sed congue nibh eget metus commodo mollis vulputate a quam. Phasellus sollicitudin nec odio sed condimentum. Etiam arcu sapien, viverra vitae pellentesque eget, placerat nec risus.
+	</div>
+	<div id="div-three" class="main_cont">
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque at lobortis augue, ut accumsan enim. Sed convallis tortor eros, et ullamcorper tortor euismod nec. Aliquam felis velit, faucibus sit amet convallis eu, iaculis sed quam. Duis suscipit libero tortor, ut mattis ante porta et.
+	</div>
+	<div id="div-four" class="main_cont">
+Suspendisse congue tincidunt nulla at vulputate. Sed sagittis sapien nisi, imperdiet facilisis nunc commodo non. Vestibulum neque metus, porttitor non tellus id, imperdiet malesuada ipsum. Vivamus sem libero, pharetra et eros volutpat, blandit pellentesque turpis. Aenean bibendum ligula sit amet molestie adipiscing.
+	</div>
+	<div id="div-five" class="main_cont">
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquam tortor felis, non mollis ligula molestie ac. Donec rutrum, libero in dignissim lobortis, magna metus hendrerit ipsum, non porttitor nisl nisi vel libero. 
+	</div>
+	<div class="navigator"><a href="#" class="prev-btn">Previous</a><a href="#" class="next-btn">Next</a></div>
+</div>
+
+<script>
+(function ($) {
+
+	$(document).ready(function(){
+
+		$(".guide_menu ul li").click(function(){
+
+			var cur_z = parseInt($(this).css("z-index"));
+			$(".guide_menu ul li").removeClass("active active2");
+			$(".guide_menu ul li").each(function(i){
+				var l_z = parseInt($(this).css("z-index"));
+				if(cur_z===l_z){
+					return false;
+				}
+				$(this).addClass("active");
+			});
+			$(this).addClass("active active2");
+		});
+
+		$(".page-guide .container .navigator .next-btn").click(function(){
+			var index = 0;
+			var len = $(".guide_menu ul li").length;
+			$(".guide_menu ul li.active").each(function(i){
+				index++;
+			});
+			$(".guide_menu ul li:eq("+index+")").trigger("click");
+			if(index<len){
+				var cont = $(".guide_menu ul li:eq("+(index-1)+")").find("a").attr("href");
+				$(cont).hide();
+				$(cont).next().show();
+			}
+			
+		});
+
+		$(".page-guide .container .navigator .prev-btn").click(function(){
+			var index = 0;
+			var len = $(".guide_menu ul li").length;
+			$(".guide_menu ul li.active").each(function(i){
+				index++;
+			});
+			$(".guide_menu ul li:eq("+(index-2)+")").trigger("click");
+			if(index!=1){
+				var cont = $(".guide_menu ul li:eq("+(index-1)+")").find("a").attr("href");
+				$(cont).hide();
+				$(cont).prev().show();
+			}
+			
+		});
+
+	});
+
+})(jQuery);
+</script>

@@ -1,0 +1,20 @@
+<?php
+// $Id: codefactory.install,belibem Exp $ 
+
+/**
+ * @file 
+ */
+
+/**
+ * Implementation of hook_install() 
+ */
+function codefactory_install() {
+
+}
+
+/**
+ * Implementation of hook_uninstall() 
+ */
+function codefactory_uninstall() {
+
+}

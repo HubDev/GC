@@ -1,0 +1,328 @@
+body {
+  padding-top: 70px;
+}
+.form-control{
+	border:none;
+}
+.navbar-default .navbar-nav > li > a {
+	text-align:center;
+	color:#eeeeee;
+}
+
+.myGoogleMapInfoWindow{
+	font-size:14px;
+	clear:both;
+	overflow: hidden;
+}
+
+@media(max-width:767px){
+	.navbar-brand  {
+		max-width:70%;
+	}
+}
+
+.navbar-brand  img{
+	width:100%;
+}
+.navbar-custom {
+	background-color:#69a1cc;
+}
+.navbar-wizzard{
+	background-color:transparent;
+}
+#rootwizard .pager{
+	margin:2px 15px;
+}
+.leaf-wizzard a:hover{
+	background-color: transparent !important; 
+}
+.leaf-wizzard:hover{
+	background-color: none !important; 
+}
+
+.navbar-wizzard  .nav-pills > li.active > a:hover{
+	 background:#428bca !important;
+}
+.leaf-wizzard a {
+	color:black;
+}
+.leaf-wizzard {
+	background-color:#87b4d6;
+	width:31%;
+	border:none;
+	padding:none;
+	margin:none;
+}
+.navbar-wizzard li:first-child {
+	width:7%;
+}
+.navbar-wizzard .nav-pills>li>a {
+	-webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+	margin-bottom:0;
+}
+
+.navbar-wizzard .active + .leaf-wizzard:after {
+	content: url('../../images/transparent.gif');
+	border-color: transparent transparent transparent #428bca;
+	border-style:solid;
+	border-width: 20px 0 20px 10px;
+	width:0;
+	height:0;
+	float:left;
+	margin-top: -40px;
+	z-index:100;
+	position:relative;
+}
+.leaf-wizzard+.leaf-wizzard{
+	margin-left:0;
+}
+.leaf-wizzard a {
+	padding: 10px 15px 10px 35px !important;
+	text-align:center !important;
+}
+.navbar-wizzard li:first-child a{
+	padding: 10px 15px 10px 5px !important;
+}
+
+.navbar-wizzard .active  ~ .leaf-wizzard {
+	background-color:transparent;
+	z-index:90;
+}
+
+#dropdown-login-form {
+	padding-bottom:10px;
+}
+
+.tour-image{
+	width:100%;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+	margin-bottom:5px;
+}
+
+.gm-style .infowindow-img{
+	width:30%;
+	margin:5px;
+	padding-right:5px;
+	float:left;
+}
+.gm-style .infowindow-text{
+	color:#428bca;
+}
+.gm-style-iw{
+	width:300px;
+	height:180px;
+}
+
+/*OggFlow */
+/*Default online chat button text */
+.oggchat_button_text_div:after {
+	content: "ArtOfLivingGreen - Click to Chat";
+}
+.overlay-button{
+	position:absolute;
+	right:0;
+	z-index:1000;
+	padding:10px;
+	margin:0;
+	background-color:#e7e7e7;
+	color:#428bca;
+	font-weight:bold;
+	border: 1px solid #428bca;
+	border-right:none;
+	
+}
+
+.overlay-button:focus{
+	outline-style:none;
+}
+.map-info-labels{
+	background-color:#e7e7e7;
+}
+.map-info-labels .point-wrapper {
+	margin:5px 0;
+}
+.map-info-labels .point-wrapper >.input-group{
+	border-collapse:collapse;
+	padding:5px 5px;
+	margin:0;
+}
+.map-info-labels .choices-toogle{
+	margin:0;
+	padding:0 5px;
+	cursor:pointer;
+	background:#ffffff;
+}
+.map-info-labels .input-group .input-group-addon{
+	border:none;
+	background:none;
+}
+.map-info-labels .choices{
+	display:none;
+	padding:5px;
+	background-color:#f7f7f7;
+}
+.map-info-labels .choices label{
+	background:none;
+	font-size:80%;
+}
+.map-info-labels label.leaf-label{
+	font-weight:normal;
+}
+.map-info-labels label.main-label{
+	font-weight:normal;
+}
+.map-info-labels .glyphicon-info-sign{
+	color:#428bca;
+}
+.map-info-labels .main-point{
+	background-color:#bee2f8;
+}
+.map-info-labels .leaf-point{
+	background-color:#bef8bf;
+}
+
+.map-info-labels .choices-toogle,
+.map-info-labels .input-group,
+.map-info-labels .input-group-addon
+{
+	background:none;
+}
+.map-info-labels  label {
+	background:none;
+	-webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+/***************************************************
+
+
+.map-info-labels{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	background:#eaeaea;
+}
+
+.toggler{
+	position: absolute;
+	left: 0;
+	z-index:9999;
+	top:5%;
+	background: #fff;
+	padding: 10px;
+}
+*/
+.infomapbgg{
+	background:#fff;
+}
+
+.infowindow_content{
+	font-size:14px;
+	line-height: 1em;
+	width:260px;
+	padding: 10px 20px;
+	position:relative;
+	padding-top:125px;
+	color:#212121;
+}
+
+.image_wrapper{
+	width:280px;
+	height:120px;
+	overflow: hidden;
+	position:absolute;
+	top:0;
+}
+
+.image_wrapper img{
+	width:100%;
+}
+
+.infowindow_content p, .infowindow_content h3{
+	margin:2px 0;
+	padding:0;
+}
+
+.infowindow_content .infowindow_tel{
+	color:#545454;
+}
+
+.infowindow_content span{
+	font-weight:bold;
+	color:#212121;
+}
+
+.infowindow_content h3{
+	color:#69a1cc;
+}
+
+.infowindow_content .arrow{
+	position:absolute;
+	bottom: -10px;
+	left:120px;
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid #fff;
+}
+
+.map-info-labels ul{
+	margin:0;
+	padding:0;
+	list-style: none;
+	text-align: center;
+	display:none;
+}
+
+.map-info-labels ul label{
+	margin-left:20px;
+}
+
+.map-info-labels li{
+	background:none;
+}
+
+.map-info-labels li textarea{
+	max-width:320px;
+	margin:0 auto;
+}
+.bx-wrapper{
+	max-width:500px !important;
+}
+.bxslider{
+	padding:0;
+	
+}
+
+.jumbotron img{
+	margin:0 auto;
+}
+
+.reset_data a{
+	background-color: #428bca !important;
+}
+
+@media(max-width:767px){
+	.choices_save_btn{
+		display:none;
+	}
+}
+
+.map_container{
+	position:relative;
+}
+
+.map_container button{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+#hipmob_branding a {color:white !important;}

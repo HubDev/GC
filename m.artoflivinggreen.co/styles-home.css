@@ -1,0 +1,56 @@
+body {
+  padding-top: 70px;
+}
+.form-control{
+	border:none;
+}
+
+.navbar-default .navbar-nav > li > a {
+	text-align:center;
+	color:#eeeeee;
+}
+.navbar-brand  img{
+	width:100%;
+}
+.navbar-custom {
+	background-color:#69a1cc;
+}
+.navbar-wizzard{
+	background-color:transparent;
+}
+
+@media(max-width:767px){
+	.navbar-brand  {
+		max-width:70%;
+	}
+}
+
+.tour-image {
+	width: 100%;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 5px;
+}
+
+.jumbotron{
+	margin-bottom:0;
+}
+
+#green_tours h3{
+	margin-top:0;
+}
+
+.tour-image-container{
+	position: relative;
+}
+
+.tour-image-container .btn{
+	position: absolute;
+	top: 40%;
+	left: 33%;
+	background: rgba(255,255,255,0.8);
+	font-size: 2.2em;
+}
+
+#hipmob_branding a {color:white !important;}

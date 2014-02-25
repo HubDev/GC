@@ -1,0 +1,147 @@
+ body {
+	margin: 0;
+	padding: 0;
+ }
+ 
+ #background 
+{ 
+	 left: 0px; 
+	 top: 0px; 
+	 position: relative; 
+	 margin-left: auto; 
+	 margin-right: auto; 
+	 width: 688px;
+	 height: 486px; 
+	 overflow: hidden;
+	 z-index:0;
+	} 
+
+ #Background 
+{ 
+	 left: 0px; 
+	 top: 0px; 
+	 position: absolute; 
+	 width: 688px;
+	 height: 486px;
+	 z-index:1;
+} 
+
+ #Backgroundcopy2 
+{ 
+	 left: 45px; 
+	 top: 34px; 
+	 position: absolute; 
+	 width: 289px;
+	 height: 74px;
+	 z-index:2;
+} 
+
+ #ArtofLivingGreen 
+{ 
+	 left: 77px; 
+	 top: 55px; 
+	 position: absolute; 
+	 width: 225px;
+	 height: 33px;
+	 z-index:3;
+} 
+
+ #Backgroundcopy2_0 
+{ 
+	 left: 45px; 
+	 top: 147px; 
+	 position: absolute; 
+	 width: 289px;
+	 height: 74px;
+	 z-index:4;
+} 
+
+ #ArtofLivingGreen_0 
+{ 
+	 left: 77px; 
+	 top: 168px; 
+	 position: absolute; 
+	 width: 225px;
+	 height: 33px;
+	 z-index:5;
+} 
+
+ #Backgroundcopy2_1 
+{ 
+	 left: 45px; 
+	 top: 260px; 
+	 position: absolute; 
+	 width: 289px;
+	 height: 74px;
+	 z-index:6;
+} 
+
+ #ArtofLivingGreen_1 
+{ 
+	 left: 77px; 
+	 top: 282px; 
+	 position: absolute; 
+	 width: 225px;
+	 height: 32px;
+	 z-index:7;
+} 
+
+ #Backgroundcopy2_2 
+{ 
+	 left: 45px; 
+	 top: 373px; 
+	 position: absolute; 
+	 width: 289px;
+	 height: 74px;
+	 z-index:8;
+} 
+
+ #ArtofLivingGreen_2 
+{ 
+	 left: 77px; 
+	 top: 395px; 
+	 position: absolute; 
+	 width: 225px;
+	 height: 32px;
+	 z-index:9;
+} 
+
+ #ArtofLivingGreen_3 
+{ 
+	 left: 396px; 
+	 top: 55px; 
+	 position: absolute; 
+	 width: 225px;
+	 height: 33px;
+	 z-index:10;
+} 
+
+ #ArtofLivingGreen_4 
+{ 
+	 left: 396px; 
+	 top: 168px; 
+	 position: absolute; 
+	 width: 225px;
+	 height: 33px;
+	 z-index:11;
+} 
+
+ #ArtofLivingGreen_5 
+{ 
+	 left: 396px; 
+	 top: 282px; 
+	 position: absolute; 
+	 width: 225px;
+	 height: 32px;
+	 z-index:12;
+} 
+
+ #ArtofLivingGreen_6 
+{ 
+	 left: 396px; 
+	 top: 395px; 
+	 position: absolute; 
+	 width: 225px;
+	 height: 32px;
+	 z-index:13;
+} 
